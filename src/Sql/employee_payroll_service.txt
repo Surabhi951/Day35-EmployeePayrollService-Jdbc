@@ -1,0 +1,72 @@
+show databases;
+create database payroll_service;
+show databases;
+use payroll_service;
+
+create table employee_payroll(id int auto_increment,name varchar(30),salary double,start_date date,primary key(id));
+insert into employee_payroll(name,salary,start_date)values('surabhi',25000,'2020-10-03'),
+('sayali',30000,'2021-09-07'),('anuj',20000,'2022-02-05'),
+('chetan',40000,'2023-03-04'),('mayuri',23000,'2021-05-09');
+
+select * from employee_payroll;
+select * from employee_payroll order by name desc;
+select salary from employee_payroll where name = 'surabhi';
+select start_date from employee_payroll where start_date between cast('2020-10-03' as date) and date(now());
+
+alter table employee_payroll add gender varchar(1) after name;
+
+update employee_payroll set gender = 'F' where name = 'surabhi';
+update employee_payroll set gender = 'F' where name = 'sayali' or name = 'mayuri';
+update employee_payroll set gender = 'M' where name = 'anuj' or name = 'chetan';
+
+select sum(salary) from employee_payroll where gender = 'F' group by gender;
+select avg(salary) from employee_payroll where gender = 'F' group by gender;
+select min(salary) from employee_payroll where gender = 'M' group by gender;
+select max(salary) from employee_payroll where gender = 'F' group by gender;
+select count(salary) from employee_payroll where gender = 'M' group by gender;
+
+alter table employee_payroll add phoneNumber long;
+alter table employee_payroll add address varchar(70);
+alter table employee_payroll add department varchar(40);
+
+update employee_payroll set phoneNumber = 8541236598 where name = 'surabhi';
+update employee_payroll set address = 'kothrud' where name = 'surabhi';
+update employee_payroll set department = 'account' where name = 'surabhi';
+update employee_payroll set phoneNumber = 8942513659 where name = 'sayali';
+update employee_payroll set address = 'shivajinagar' where name = 'sayali';
+update employee_payroll set department = 'testing' where name = 'sayali';
+update employee_payroll set phoneNumber = 7854123659 where id = 3;
+update employee_payroll set address = 'warje' where id = 3;
+update employee_payroll set department = 'account' where id = 3;
+update employee_payroll set phoneNumber = 9854126357 where id = 4;
+update employee_payroll set address = 'kothrud' where id = 4;
+update employee_payroll set department = 'hr' where id = 4;
+update employee_payroll set phoneNumber = 8745132695 where id = 5;
+update employee_payroll set address = 'pimpri' where id = 5;
+update employee_payroll set department = 'testing' where id = 5;
+
+alter table employee_payroll add column basicPay varchar(40), add column deductions varchar(40),
+add column taxablePay varchar(40), add column incomeTax varchar(40), add column netPay varchar(40);
+
+create table employee_department(department_id int auto_increment, department_name varchar(20), employee_department_id int,
+primary key(department_id),
+foreign key(employee_department_id) references employee_payroll(id));
+
+desc employee_department;
+
+insert into employee_department (department_name , employee_department_id) values('account', 1 ), ('testing' , 2);
+select * from employee_department;
+
+select employee_payroll.name, employee_payroll.start_date ,
+ employee_department.department_name from employee_payroll
+ inner join employee_department
+ on employee_payroll.id = employee_department.employee_department_id ;
+
+ select employee_payroll.name, employee_payroll.start_date ,
+ employee_department.department_name from employee_payroll
+ left join employee_department
+ on employee_payroll.id = employee_department.employee_department_id ;
+
+ select employee_payroll.name, employee_payroll.start_date ,
+ employee_department.department_name from employee_payroll
+ cross join employee_department ;
