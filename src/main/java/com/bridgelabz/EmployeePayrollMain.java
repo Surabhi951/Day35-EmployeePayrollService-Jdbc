@@ -10,5 +10,8 @@ public class EmployeePayrollMain {
 
         System.out.println("Update salary: ");
         employeePayrollService.updateSalary("anuj",300000.00);
+
+        System.out.println("Salary between range: ");
+        employeePayrollService.getEmployeeBetweenSalaryRange(40000.00,300000.00);
     }
 }
