@@ -13,5 +13,21 @@ public class EmployeePayrollMain {
 
         System.out.println("Salary between range: ");
         employeePayrollService.getEmployeeBetweenSalaryRange(40000.00,300000.00);
+
+        System.out.println("SUM(salary) of male and female: ");
+        employeePayrollService.getSumOfSalaryByMaleAndFemale();
+
+        System.out.println("AVG(salary) of male and female: ");
+        employeePayrollService.getAvgOfSalaryByMaleAndFemale();
+
+        System.out.println("MIN(salary) of male and female: ");
+        employeePayrollService.getMinOfSalaryByMaleAndFemale();
+
+        System.out.println("MAX(salary) of male and female: ");
+        employeePayrollService.getMaxOfSalaryByMaleAndFemale();
+
+        System.out.println("COUNT(salary) of male and female: ");
+        employeePayrollService.getCountOfSalaryByMaleAndFemale();
+
     }
 }
