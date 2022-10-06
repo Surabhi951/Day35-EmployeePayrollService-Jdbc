@@ -49,4 +49,54 @@ public class EmployeePayrollService {
         employeePayrollDataList.forEach(System.out::println);
         connection.close();
     }
+
+    public void getSumOfSalaryByMaleAndFemale() throws SQLException {
+        Connection connection = JdbcConnection.connectToDatabase();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select sum(salary) from employee_payroll where gender = 'F' group by gender");
+        System.out.println("Gender count SUM(salary)");
+        while (resultSet.next()) {
+            System.out.println(resultSet.getDouble(1));
+        }
+    }
+
+    public void getAvgOfSalaryByMaleAndFemale() throws SQLException {
+        Connection connection = JdbcConnection.connectToDatabase();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select avg(salary) from employee_payroll where gender = 'F' group by gender");
+        System.out.println("Gender count AVG(salary)");
+        while (resultSet.next()) {
+            System.out.println(resultSet.getDouble(1));
+        }
+    }
+
+    public void getMinOfSalaryByMaleAndFemale() throws SQLException {
+        Connection connection = JdbcConnection.connectToDatabase();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select min(salary) from employee_payroll where gender = 'M' group by gender");
+        System.out.println("Gender count MIN(salary)");
+        while (resultSet.next()) {
+            System.out.println(resultSet.getDouble(1));
+        }
+    }
+
+    public void getMaxOfSalaryByMaleAndFemale() throws SQLException {
+        Connection connection = JdbcConnection.connectToDatabase();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select max(salary) from employee_payroll where gender = 'M' group by gender");
+        System.out.println("Gender count MAX(salary)");
+        while (resultSet.next()) {
+            System.out.println(resultSet.getDouble(1));
+        }
+    }
+
+    public void getCountOfSalaryByMaleAndFemale() throws SQLException {
+        Connection connection = JdbcConnection.connectToDatabase();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select count(salary) from employee_payroll where gender = 'F' group by gender");
+        System.out.println("Gender COUNT(salary)");
+        while (resultSet.next()) {
+            System.out.println(resultSet.getDouble(1));
+        }
+    }
 }
