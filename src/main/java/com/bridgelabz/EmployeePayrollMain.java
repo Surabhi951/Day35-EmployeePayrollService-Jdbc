@@ -29,5 +29,8 @@ public class EmployeePayrollMain {
         System.out.println("COUNT(salary) of male and female: ");
         employeePayrollService.getCountOfSalaryByMaleAndFemale();
 
+        System.out.println("add new Employee");
+        employeePayrollService.addEmployee();
+
     }
 }

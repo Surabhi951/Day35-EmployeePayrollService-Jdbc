@@ -3,8 +3,11 @@ package com.bridgelabz;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class EmployeePayrollService {
+
+    static Scanner sc= new Scanner(System.in);
     public List<EmployeePayrollData> retrieveData() throws EmployeePayrollException {
         try {
             List<EmployeePayrollData> employeePayrollDataList = new ArrayList<>();
@@ -98,5 +101,20 @@ public class EmployeePayrollService {
         while (resultSet.next()) {
             System.out.println(resultSet.getDouble(1));
         }
+    }
+
+    public void addEmployee() throws SQLException {
+        Connection connection = JdbcConnection.connectToDatabase();
+        PreparedStatement preparedStatement=connection.prepareStatement("insert into employee_payroll (name,gender,salary,start_date) values(?,?,?,?)");
+        System.out.println("enter name: ");
+        preparedStatement.setString(1,sc.next());
+        System.out.println("enter gender: ");
+        preparedStatement.setString(2,sc.next());
+        System.out.println("enter salary");
+        preparedStatement.setDouble(3,sc.nextDouble());
+        System.out.println("enter start date: (YYYY-MM-DD)");
+        preparedStatement.setDate(4,Date.valueOf(sc.next()));
+        preparedStatement.execute();
+        System.out.println("contact added successfully!");
     }
 }
